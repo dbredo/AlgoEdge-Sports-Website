@@ -1,31 +1,34 @@
 import type { Metadata } from "next"
-import type { ReactNode } from "react"
-import { Inter, Azeret_Mono } from "next/font/google"
+import { Inter } from "next/font/google"
 import "./globals.css"
+import { SiteFooter } from "@/components/site-footer"
+import { Toaster } from "@/components/ui/toaster"
+import type React from "react" // Added import for React
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-})
-
-const azeretMono = Azeret_Mono({
-  variable: "--font-azeret-mono",
-  subsets: ["latin"],
-})
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "AlgoEdge Sports",
   description: "Transform the way you understand sports with cutting-edge data and analytics",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: ReactNode
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${azeretMono.variable} antialiased`}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <SiteFooter />
+        <Toaster />
+      </body>
     </html>
   )
 }
+
+
+
+import './globals.css'
