@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "routes": [
+    {
+      "src": "/api/webhook",
+      "dest": "/api/webhook",
+      "methods": ["POST"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST",
+        "Access-Control-Allow-Headers": "Content-Type, stripe-signature"
+      }
+    }
+  ],
+  "env": {
+    "NODE_VERSION": "18.x"
+  }
+}

@@ -1,0 +1,202 @@
+[33mcommit 3d074c12faa06b713fc61ca9ed709fb7ce243327[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Dylan Bredo CFA <dylan@thebilykteam.ca>
+Date:   Fri Jan 24 12:12:32 2025 -0700
+
+    Initial commit
+
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..5ef6a52[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,41 @@[m
+[32m+[m[32m# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.[m
+[32m+[m
+[32m+[m[32m# dependencies[m
+[32m+[m[32m/node_modules[m
+[32m+[m[32m/.pnp[m
+[32m+[m[32m.pnp.*[m
+[32m+[m[32m.yarn/*[m
+[32m+[m[32m!.yarn/patches[m
+[32m+[m[32m!.yarn/plugins[m
+[32m+[m[32m!.yarn/releases[m
+[32m+[m[32m!.yarn/versions[m
+[32m+[m
+[32m+[m[32m# testing[m
+[32m+[m[32m/coverage[m
+[32m+[m
+[32m+[m[32m# next.js[m
+[32m+[m[32m/.next/[m
+[32m+[m[32m/out/[m
+[32m+[m
+[32m+[m[32m# production[m
+[32m+[m[32m/build[m
+[32m+[m
+[32m+[m[32m# misc[m
+[32m+[m[32m.DS_Store[m
+[32m+[m[32m*.pem[m
+[32m+[m
+[32m+[m[32m# debug[m
+[32m+[m[32mnpm-debug.log*[m
+[32m+[m[32myarn-debug.log*[m
+[32m+[m[32myarn-error.log*[m
+[32m+[m[32m.pnpm-debug.log*[m
+[32m+[m
+[32m+[m[32m# env files (can opt-in for committing if needed)[m
+[32m+[m[32m.env*[m
+[32m+[m
+[32m+[m[32m# vercel[m
+[32m+[m[32m.vercel[m
+[32m+[m
+[32m+[m[32m# typescript[m
+[32m+[m[32m*.tsbuildinfo[m
+[32m+[m[32mnext-env.d.ts[m
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e215bc4[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,36 @@[m
+[32m+[m[32mThis is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).[m
+[32m+[m
+[32m+[m[32m## Getting Started[m
+[32m+[m
+[32m+[m[32mFirst, run the development server:[m
+[32m+[m
+[32m+[m[32m```bash[m
+[32m+[m[32mnpm run dev[m
+[32m+[m[32m# or[m
+[32m+[m[32myarn dev[m
+[32m+[m[32m# or[m
+[32m+[m[32mpnpm dev[m
+[32m+[m[32m# or[m
+[32m+[m[32mbun dev[m
+[32m+[m[32m```[m
+[32m+[m
+[32m+[m[32mOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.[m
+[32m+[m
+[32m+[m[32mYou can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.[m
+[32m+[m
+[32m+[m[32mThis project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.[m
+[32m+[m
+[32m+[m[32m## Learn More[m
+[32m+[m
+[32m+[m[32mTo learn more about Next.js, take a look at the following resources:[m
+[32m+[m
+[32m+[m[32m- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.[m
+[32m+[m[32m- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.[m
+[32m+[m
+[32m+[m[32mYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome![m
+[32m+[m
+[32m+[m[32m## Deploy on Vercel[m
+[32m+[m
+[32m+[m[32mThe easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.[m
+[32m+[m
+[32m+[m[32mCheck out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.[m
+[1mdiff --git a/app/favicon.ico b/app/favicon.ico[m
+[1mnew file mode 100644[m
+[1mindex 0000000..718d6fe[m
+Binary files /dev/null and b/app/favicon.ico differ
+[1mdiff --git a/app/globals.css b/app/globals.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6b717ad[m
+[1m--- /dev/null[m
+[1m+++ b/app/globals.css[m
+[36m@@ -0,0 +1,21 @@[m
+[32m+[m[32m@tailwind base;[m
+[32m+[m[32m@tailwind components;[m
+[32m+[m[32m@tailwind utilities;[m
+[32m+[m
+[32m+[m[32m:root {[m
+[32m+[m[32m  --background: #ffffff;[m
+[32m+[m[32m  --foreground: #171717;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media (prefers-color-scheme: dark) {[m
+[32m+[m[32m  :root {[m
+[32m+[m[32m    --background: #0a0a0a;[m
+[32m+[m[32m    --foreground: #ededed;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mbody {[m
+[32m+[m[32m  color: var(--foreground);[m
+[32m+[m[32m  background: var(--background);[m
+[32m+[m[32m  font-family: Arial, Helvetica, sans-serif;[m
+[32m+[m[32m}[m
+[1mdiff --git a/app/layout.tsx b/app/layout.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..f7fa87e[m
+[1m--- /dev/null[m
+[1m+++ b/app/layout.tsx[m
+[36m@@ -0,0 +1,34 @@[m
+[32m+[m[32mimport type { Metadata } from "next";[m
+[32m+[m[32mimport { Geist, Geist_Mono } from "next/font/google";[m
+[32m+[m[32mimport "./globals.css";[m
+[32m+[m
+[32m+[m[32mconst geistSans = Geist({[m
+[32m+[m[32m  variable: "--font-geist-sans",[m
+[32m+[m[32m  subsets: ["latin"],[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32mconst geistMono = Geist_Mono({[m
+[32m+[m[32m  variable: "--font-geist-mono",[m
+[32m+[m[32m  subsets: ["latin"],[m
+[32m+[m[32m});[m
+[32m+[m
+[32m+[m[32mexport const metadata: Metadata = {[m
+[32m+[m[32m  title: "Create Next App",[m
+[32m+[m[32m  description: "Generated by create next app",[m
+[32m+[m[32m};[m
+[32m+[m
+[32m+[m[32mexport default function RootLayout({[m
+[32m+[m[32m  children,[m
+[32m+[m[32m}: Readonly<{[m
+[32m+[m[32m  children: React.ReactNode;[m
+[32m+[m[32m}>) {[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <html lang="en">[m
+[32m+[m[32m      <body[m
+[32m+[m[32m        className={`${geistSans.variable} ${geistMono.variable} antialiased`}[m
+[32m+[m[32m      >[m
+[32m+[m[32m        {children}[m
+[32m+[m[32m      </body>[m
+[32m+[m[32m    </html>[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[1mdiff --git a/app/page.tsx b/app/page.tsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..9007252[m
+[1m--- /dev/null[m
+[1m+++ b/app/page.tsx[m
+[36m@@ -0,0 +1,101 @@[m
+[32m+[m[32mimport Image from "next/image";[m
+[32m+[m
+[32m+[m[32mexport default function Home() {[m
+[32m+[m[32m  return ([m
+[32m+[m[32m    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">[m
+[32m+[m[32m      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">[m
+[32m+[m[32m        <Image[m
+[32m+[m[32m          className="dark:invert"[m
+[32m+[m[32m          src="/next.svg"[m
+[32m+[m[32m          alt="Next.js logo"[m
+[32m+[m[32m          width={180}[m
+[32m+[m[32m          height={38}[m
+[32m+[m[32m          priority[m
+[32m+[m[32m        />[m
+[32m+[m[32m        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">[m
+[32m+[m[32m          <li className="mb-2">[m
+[32m+[m[32m            Get started by editing{" "}[m
+[32m+[m[32m            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">[m
+[32m+[m[32m              app/page.tsx[m
+[32m+[m[32m            </code>[m
+[32m+[m[32m            .[m
+[32m+[m[32m          </li>[m
+[32m+[m[32m          <li>Save and see your changes instantly.</li>[m
+[32m+[m[32m        </ol>[m
+[32m+[m
+[32m+[m[32m        <div className="flex gap-4 items-center flex-col sm:flex-row">[m
+[32m+[m[32m          <a[m
+[32m+[m[32m            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"[m
+[32m+[m[32m            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"[m
+[32m+[m[32m            target="_blank
