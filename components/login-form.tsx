@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -19,15 +21,15 @@ export function LoginForm() {
 
   useEffect(() => {
     const checkSession = async () => {
-      console.log("LoginForm: Checking for existing session")
+      console.log("[LoginForm] Checking for existing session")
       const {
         data: { session },
       } = await supabase.auth.getSession()
       if (session) {
-        console.log("LoginForm: Existing session found, redirecting to dashboard")
+        console.log("[LoginForm] Existing session found, redirecting to dashboard")
         router.push("/dashboard")
       } else {
-        console.log("LoginForm: No existing session found")
+        console.log("[LoginForm] No existing session found")
       }
     }
     checkSession()
@@ -39,25 +41,28 @@ export function LoginForm() {
     setError(null)
 
     try {
-      console.log("LoginForm: Login attempt started")
+      console.log("[LoginForm] Login attempt started with email:", email)
       const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      console.log("[LoginForm] Login attempt result:", data)
 
       if (error) throw error
 
       if (data.session) {
-        console.log("LoginForm: Login successful, session created:", data.session.user.id)
+        console.log("[LoginForm] Login successful, session created:", data.session.user.id)
         await supabase.auth.setSession(data.session)
         toast({
           title: "Sign in successful",
           description: "Welcome back!",
         })
-        console.log("LoginForm: Redirecting to dashboard after successful login")
+        console.log("[LoginForm] Redirecting to dashboard after successful login")
+        console.log("[LoginForm] Pushing to dashboard route")
         router.push("/dashboard")
+        console.log("[LoginForm] Router push completed")
       } else {
         throw new Error("No session data returned")
       }
     } catch (error) {
-      console.error("LoginForm: Login error:", error)
+      console.error("[LoginForm] Login error:", error)
       setError(error instanceof Error ? error.message : "An unknown error occurred")
       toast({
         title: "Login failed",
@@ -66,7 +71,7 @@ export function LoginForm() {
       })
     } finally {
       setLoading(false)
-      console.log("LoginForm: Login attempt finished")
+      console.log("[LoginForm] Login attempt finished")
     }
   }
 
