@@ -1,40 +1,44 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import type React from "react" // Added import for React
+import { Lightbulb, Code, BarChart2, Zap } from "lucide-react"
 
-interface HeroSectionProps {
-  title: string
-  description: string
-  cta: React.ReactNode
-}
+const steps = [
+  {
+    icon: Lightbulb,
+    title: "Define Your Strategy",
+    description: "Identify the key factors and metrics that matter most for your sports analysis.",
+  },
+  {
+    icon: Code,
+    title: "Build Custom Algorithms",
+    description:
+      "Use our intuitive interface to create algorithms tailored to your specific needs, no coding required.",
+  },
+  {
+    icon: BarChart2,
+    title: "Analyze Real-Time Data",
+    description: "Access up-to-the-minute stats and apply your algorithms for instant insights.",
+  },
+  {
+    icon: Zap,
+    title: "Make Informed Decisions",
+    description: "Use the generated insights to make data-driven decisions for betting or fantasy leagues.",
+  },
+]
 
-export function HeroSection({ title, description, cta }: HeroSectionProps) {
+export function HowItWorksSection() {
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8">
-        <div className="grid min-h-[calc(100vh-72px)] grid-cols-1 lg:grid-cols-2 items-center gap-16 py-24">
-          <div className="flex flex-col gap-5">
-            <h1 className="text-[48px] lg:text-[64px] font-bold leading-[1.1] tracking-[-0.02em]">{title}</h1>
-            <p className="text-[18px] lg:text-[20px] leading-[1.6] text-[#4b5563]">{description}</p>
-            <div className="flex items-center gap-3 pt-3">
-              {cta}
-              <Link href="/features" target="_blank" rel="noopener noreferrer">
-                <Button
-                  variant="outline"
-                  className="h-11 rounded-md border-gray-300 px-6 text-[15px] font-medium hover:bg-gray-50"
-                >
-                  Explore Features
-                </Button>
-              </Link>
+    <section className="py-24 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-12">How AlgoEdge Works</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {steps.map((step, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              <div className="bg-[#3f6d63] rounded-full p-4 mb-4">
+                <step.icon className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+              <p className="text-gray-600">{step.description}</p>
             </div>
-          </div>
-          <div className="relative aspect-[1.33] w-full">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Home%20Page%20Picture%20-%20AlgoEdge-ZeFhphJv62jCY9yZGd6RGx34krYjJL.webp"
-              alt="AlgoEdge Sports Analytics Dashboard"
-              className="absolute inset-0 h-full w-full rounded-2xl object-cover"
-            />
-          </div>
+          ))}
         </div>
       </div>
     </section>
