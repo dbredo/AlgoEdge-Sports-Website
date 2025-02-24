@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -24,7 +23,14 @@ export function LoginForm() {
       console.log("[LoginForm] Checking for existing session")
       const {
         data: { session },
+        error,
       } = await supabase.auth.getSession()
+
+      if (error) {
+        console.error("[LoginForm] Error checking session:", error)
+        return
+      }
+
       if (session) {
         console.log("[LoginForm] Existing session found:", {
           userId: session.user.id,
@@ -68,7 +74,8 @@ export function LoginForm() {
         description: "Welcome back!",
       })
 
-      router.push("/dashboard")
+      // Force a hard reload to ensure the new session is picked up
+      window.location.href = "/dashboard"
     } catch (error) {
       console.error("[LoginForm] Login error:", error)
       setError(error instanceof Error ? error.message : "An unknown error occurred")
