@@ -26,7 +26,10 @@ export function LoginForm() {
         data: { session },
       } = await supabase.auth.getSession()
       if (session) {
-        console.log("[LoginForm] Existing session found, redirecting to dashboard")
+        console.log("[LoginForm] Existing session found:", {
+          userId: session.user.id,
+          email: session.user.email,
+        })
         router.push("/dashboard")
       } else {
         console.log("[LoginForm] No existing session found")
@@ -41,26 +44,48 @@ export function LoginForm() {
     setError(null)
 
     try {
-      console.log("[LoginForm] Login attempt started with email:", email)
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-      console.log("[LoginForm] Login attempt result:", data)
+      console.log("[LoginForm] Attempting login with email:", email)
 
-      if (error) throw error
+      // First, sign in with password
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
-      if (data.session) {
-        console.log("[LoginForm] Login successful, session created:", data.session.user.id)
-        await supabase.auth.setSession(data.session)
-        toast({
-          title: "Sign in successful",
-          description: "Welcome back!",
-        })
-        console.log("[LoginForm] Redirecting to dashboard after successful login")
-        console.log("[LoginForm] Pushing to dashboard route")
-        router.push("/dashboard")
-        console.log("[LoginForm] Router push completed")
-      } else {
+      if (signInError) throw signInError
+
+      if (!data.session) {
         throw new Error("No session data returned")
       }
+
+      // Explicitly set the session
+      await supabase.auth.setSession(data.session)
+
+      // Verify the session was set
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
+
+      if (!session) {
+        throw new Error("Failed to persist session")
+      }
+
+      console.log("[LoginForm] Login successful, session created:", {
+        userId: session.user.id,
+        email: session.user.email,
+        expiresAt: session.expires_at,
+      })
+
+      toast({
+        title: "Sign in successful",
+        description: "Welcome back!",
+      })
+
+      // Force a router refresh to update the auth state
+      router.refresh()
+
+      console.log("[LoginForm] Redirecting to dashboard")
+      router.push("/dashboard")
     } catch (error) {
       console.error("[LoginForm] Login error:", error)
       setError(error instanceof Error ? error.message : "An unknown error occurred")
@@ -71,7 +96,6 @@ export function LoginForm() {
       })
     } finally {
       setLoading(false)
-      console.log("[LoginForm] Login attempt finished")
     }
   }
 
