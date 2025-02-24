@@ -16,6 +16,13 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     persistSession: true,
     detectSessionInUrl: true,
     storage: typeof window !== "undefined" ? window.localStorage : undefined,
+    cookieOptions: {
+      name: "sb-auth-token",
+      lifetime: 60 * 60 * 24 * 7, // 1 week
+      domain: process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL).hostname : undefined,
+      sameSite: "lax",
+      path: "/",
+    },
   },
 })
 
@@ -31,7 +38,6 @@ export async function testSupabaseConnection() {
     return { success: false, error }
   }
 }
-
 
 
 

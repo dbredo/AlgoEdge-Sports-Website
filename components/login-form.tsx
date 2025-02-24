@@ -1,48 +1,21 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { supabase } from "@/lib/supabase"
+import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "@/components/ui/use-toast"
-import { AlertCircle } from "lucide-react"
+import { supabase } from "@/lib/supabase"
 
-export function LoginForm() {
+const LoginForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const { toast } = useToast()
   const router = useRouter()
-
-  useEffect(() => {
-    const checkSession = async () => {
-      console.log("[LoginForm] Checking for existing session")
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.getSession()
-
-      if (error) {
-        console.error("[LoginForm] Error checking session:", error)
-        return
-      }
-
-      if (session) {
-        console.log("[LoginForm] Existing session found:", {
-          userId: session.user.id,
-          email: session.user.email,
-        })
-        router.push("/dashboard")
-      } else {
-        console.log("[LoginForm] No existing session found")
-      }
-    }
-    checkSession()
-  }, [router])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -69,13 +42,32 @@ export function LoginForm() {
         expiresAt: data.session.expires_at,
       })
 
+      // Set the session cookie explicitly
+      await supabase.auth.setSession(data.session)
+
       toast({
         title: "Sign in successful",
         description: "Welcome back!",
       })
 
-      // Force a hard reload to ensure the new session is picked up
-      window.location.href = "/dashboard"
+      // Add a small delay to ensure cookie is set
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
+      // Verify session is set before redirect
+      const {
+        data: { session: verifySession },
+      } = await supabase.auth.getSession()
+      console.log("[LoginForm] Session verification:", {
+        hasSession: !!verifySession,
+        userId: verifySession?.user?.id,
+      })
+
+      if (verifySession) {
+        // Use router.push instead of window.location for smoother transition
+        router.push("/dashboard")
+      } else {
+        throw new Error("Session verification failed")
+      }
     } catch (error) {
       console.error("[LoginForm] Login error:", error)
       setError(error instanceof Error ? error.message : "An unknown error occurred")
@@ -93,35 +85,33 @@ export function LoginForm() {
     <form onSubmit={handleLogin} className="space-y-4">
       <div>
         <Label htmlFor="email">Email</Label>
-        <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <Input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+        />
       </div>
       <div>
         <Label htmlFor="password">Password</Label>
-        <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <Input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter your password"
+          required
+        />
       </div>
-
-      {error && (
-        <div className="flex items-center space-x-2 text-red-600">
-          <AlertCircle className="h-5 w-5" />
-          <span>{error}</span>
-        </div>
-      )}
-
-      <Button type="submit" disabled={loading} className="w-full">
-        {loading ? "Signing in..." : "Sign In"}
+      {error && <p className="text-red-500">{error}</p>}
+      <Button disabled={loading} type="submit">
+        {loading ? "Logging in..." : "Login"}
       </Button>
-
-      <div className="space-y-2 text-center text-sm">
-        <p>
-          Don't have an account?{" "}
-          <Link href="/register" className="text-blue-600 hover:underline">
-            Sign Up
-          </Link>
-        </p>
-        <Link href="/forgot-password" className="text-blue-600 hover:underline">
-          Forgot your password?
-        </Link>
-      </div>
     </form>
   )
 }
+
+export default LoginForm
+
