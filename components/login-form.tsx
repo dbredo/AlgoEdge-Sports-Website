@@ -46,7 +46,6 @@ export function LoginForm() {
     try {
       console.log("[LoginForm] Attempting login with email:", email)
 
-      // First, sign in with password
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -58,22 +57,10 @@ export function LoginForm() {
         throw new Error("No session data returned")
       }
 
-      // Explicitly set the session
-      await supabase.auth.setSession(data.session)
-
-      // Verify the session was set
-      const {
-        data: { session },
-      } = await supabase.auth.getSession()
-
-      if (!session) {
-        throw new Error("Failed to persist session")
-      }
-
       console.log("[LoginForm] Login successful, session created:", {
-        userId: session.user.id,
-        email: session.user.email,
-        expiresAt: session.expires_at,
+        userId: data.session.user.id,
+        email: data.session.user.email,
+        expiresAt: data.session.expires_at,
       })
 
       toast({
@@ -81,10 +68,6 @@ export function LoginForm() {
         description: "Welcome back!",
       })
 
-      // Force a router refresh to update the auth state
-      router.refresh()
-
-      console.log("[LoginForm] Redirecting to dashboard")
       router.push("/dashboard")
     } catch (error) {
       console.error("[LoginForm] Login error:", error)

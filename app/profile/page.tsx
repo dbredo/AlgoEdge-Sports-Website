@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header"
 import { ProfileContent } from "@/components/profile-content"
 import { ProtectedRoute } from "@/components/protected-route"
 import stripe from "@/lib/stripe"
+import { redirect } from "next/navigation"
 
 export const dynamic = "force-dynamic"
 
@@ -73,12 +74,12 @@ export default async function ProfilePage() {
 
     if (sessionError) {
       console.error(`[ProfilePage ${requestTime}] Session error:`, sessionError)
-      return null
+      redirect("/login")
     }
 
     if (!session?.user) {
-      console.log(`[ProfilePage ${requestTime}] No session found`)
-      return null
+      console.log(`[ProfilePage ${requestTime}] No session found, redirecting to login`)
+      redirect("/login")
     }
 
     console.log(`[ProfilePage ${requestTime}] Session found:`, {
@@ -120,6 +121,6 @@ export default async function ProfilePage() {
     )
   } catch (error) {
     console.error(`[ProfilePage ${requestTime}] Unexpected error:`, error)
-    return null
+    redirect("/login")
   }
 }

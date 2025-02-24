@@ -40,8 +40,13 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/dashboard", request.url))
       }
     } else {
-      console.log(`[Middleware ${requestTime}] No session found for protected route`)
-      // Optional: Add your protected routes logic here
+      const protectedRoutes = ["/profile", "/dashboard", "/data-hub"]
+      if (protectedRoutes.includes(request.nextUrl.pathname)) {
+        console.log(
+          `[Middleware ${requestTime}] Unauthenticated user attempting to access protected route, redirecting to login`,
+        )
+        return NextResponse.redirect(new URL("/login", request.url))
+      }
     }
 
     console.log(`[Middleware ${requestTime}] Request proceeding normally`)
