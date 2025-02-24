@@ -8,33 +8,34 @@ import stripe from "@/lib/stripe"
 export const dynamic = "force-dynamic"
 
 async function getSubscriptionPlan(stripeCustomerId: string | null) {
-  console.log("[getSubscriptionPlan] Starting with stripeCustomerId:", stripeCustomerId)
+  const logPrefix = "[getSubscriptionPlan]"
+  console.log(`${logPrefix} Starting with stripeCustomerId:`, stripeCustomerId)
 
   if (!stripeCustomerId) {
-    console.log("[getSubscriptionPlan] No stripeCustomerId, returning Free")
+    console.log(`${logPrefix} No stripeCustomerId, returning Free`)
     return "Free"
   }
 
   try {
-    console.log("[getSubscriptionPlan] Attempting to retrieve customer from Stripe")
+    console.log(`${logPrefix} Attempting to retrieve customer from Stripe`)
     const customer = await stripe.customers.retrieve(stripeCustomerId, {
       expand: ["subscriptions"],
     })
-    console.log("[getSubscriptionPlan] Retrieved customer:", JSON.stringify(customer, null, 2))
+    console.log(`${logPrefix} Retrieved customer:`, JSON.stringify(customer, null, 2))
 
     if (customer.deleted) {
-      console.log("[getSubscriptionPlan] Customer is deleted, returning Free")
+      console.log(`${logPrefix} Customer is deleted, returning Free`)
       return "Free"
     }
 
     const subscription = customer.subscriptions?.data[0]
     if (!subscription) {
-      console.log("[getSubscriptionPlan] No active subscription found, returning Free")
+      console.log(`${logPrefix} No active subscription found, returning Free`)
       return "Free"
     }
 
     const priceId = subscription.items.data[0].price.id
-    console.log("[getSubscriptionPlan] Extracted Price ID:", priceId)
+    console.log(`${logPrefix} Extracted Price ID:`, priceId)
 
     const planMap = {
       price_1QkUBPG6KmMfCiR87bv1Su72: "Basic",
@@ -43,70 +44,82 @@ async function getSubscriptionPlan(stripeCustomerId: string | null) {
     }
 
     const plan = planMap[priceId] || "Unknown"
-    console.log("[getSubscriptionPlan] Determined plan:", plan)
+    console.log(`${logPrefix} Determined plan:`, plan)
     return plan
   } catch (error) {
-    console.error("[getSubscriptionPlan] Error fetching subscription:", error)
+    console.error(`${logPrefix} Error fetching subscription:`, error)
     return "Unknown"
   }
 }
 
 export default async function ProfilePage() {
-  console.log("[ProfilePage] Starting profile page render", new Date().toISOString())
+  const requestTime = new Date().toISOString()
+  console.log(`[ProfilePage ${requestTime}] Starting profile page render`)
+
   const cookieStore = cookies()
+  console.log(
+    `[ProfilePage ${requestTime}] Available cookies:`,
+    cookieStore.getAll().map((c) => c.name),
+  )
+
   const supabase = createServerComponentClient({ cookies: () => cookieStore })
 
-  // Get the session
-  const {
-    data: { session },
-    error: sessionError,
-  } = await supabase.auth.getSession()
+  try {
+    console.log(`[ProfilePage ${requestTime}] Attempting to get session`)
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession()
 
-  if (sessionError) {
-    console.error("[ProfilePage] Session error:", sessionError)
+    if (sessionError) {
+      console.error(`[ProfilePage ${requestTime}] Session error:`, sessionError)
+      return null
+    }
+
+    if (!session?.user) {
+      console.log(`[ProfilePage ${requestTime}] No session found`)
+      return null
+    }
+
+    console.log(`[ProfilePage ${requestTime}] Session found:`, {
+      userId: session.user.id,
+      email: session.user.email,
+      userMetadata: session.user.user_metadata,
+      sessionExpiresAt: session.expires_at,
+    })
+
+    console.log(`[ProfilePage ${requestTime}] Fetching profile data`)
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", session.user.id)
+      .single()
+
+    if (profileError) {
+      console.error(`[ProfilePage ${requestTime}] Profile error:`, profileError)
+    }
+
+    console.log(`[ProfilePage ${requestTime}] Profile data:`, profile)
+
+    const subscriptionPlan = await getSubscriptionPlan(profile?.stripe_customer_id)
+
+    console.log(`[ProfilePage ${requestTime}] Final data:`, {
+      user: session.user,
+      profile,
+      subscriptionPlan,
+    })
+
+    return (
+      <ProtectedRoute>
+        <SiteHeader />
+        <main className="container mx-auto px-4 py-8 pt-[72px]">
+          <h1 className="text-3xl font-bold mb-6 text-[#3f6d63]">Your Profile</h1>
+          <ProfileContent user={session.user} profile={profile} subscriptionPlan={subscriptionPlan} />
+        </main>
+      </ProtectedRoute>
+    )
+  } catch (error) {
+    console.error(`[ProfilePage ${requestTime}] Unexpected error:`, error)
     return null
   }
-
-  if (!session?.user) {
-    console.log("[ProfilePage] No session found")
-    return null
-  }
-
-  console.log("[ProfilePage] Session found:", {
-    userId: session.user.id,
-    email: session.user.email,
-    userMetadata: session.user.user_metadata,
-  })
-
-  // Get the profile data
-  const { data: profile, error: profileError } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", session.user.id)
-    .single()
-
-  if (profileError) {
-    console.error("[ProfilePage] Profile error:", profileError)
-  }
-
-  console.log("[ProfilePage] Profile data:", profile)
-
-  // Get subscription plan
-  const subscriptionPlan = await getSubscriptionPlan(profile?.stripe_customer_id)
-
-  console.log("[ProfilePage] Final data:", {
-    user: session.user,
-    profile,
-    subscriptionPlan,
-  })
-
-  return (
-    <ProtectedRoute>
-      <SiteHeader />
-      <main className="container mx-auto px-4 py-8 pt-[72px]">
-        <h1 className="text-3xl font-bold mb-6 text-[#3f6d63]">Your Profile</h1>
-        <ProfileContent user={session.user} profile={profile} subscriptionPlan={subscriptionPlan} />
-      </main>
-    </ProtectedRoute>
-  )
 }
