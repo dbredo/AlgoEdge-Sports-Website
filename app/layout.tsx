@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { SiteFooter } from "@/components/site-footer"
 import { Toaster } from "@/components/ui/toaster"
 import type React from "react"
 import { cookies } from "next/headers"
@@ -11,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "AlgoEdge Sports",
-  description: "Transform the way you understand sports with cutting-edge data and analytics",
+  description: "Advanced Sports Analytics Platform",
   generator: "v0.dev",
 }
 
@@ -34,7 +33,6 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           {children}
-          <SiteFooter />
           <Toaster />
         </body>
       </html>
@@ -45,7 +43,6 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           {children}
-          <SiteFooter />
           <Toaster />
         </body>
       </html>
