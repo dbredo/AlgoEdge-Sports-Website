@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { SiteHeader } from "@/components/site-header"
+import { SiteFooter } from "@/components/site-footer"
 import { Heart, Lightbulb, Users, Target, Share2, Shield, Sparkles } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -251,6 +252,8 @@ export default function AboutPage() {
           </section>
         </div>
       </main>
+      <SiteFooter />
     </>
   )
 }
+
