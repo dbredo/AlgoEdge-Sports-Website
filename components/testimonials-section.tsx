@@ -1,51 +1,58 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Quote } from "lucide-react"
 
 const testimonials = [
   {
     quote:
-      "AlgoEdge has completely transformed my approach to sports betting. The custom algorithms have given me a significant edge in my analysis.",
+      "This is exactly what's been missing — the ability to customize and weight data without writing code. It's going to be huge.",
     author: "Michael S.",
-    role: "Professional Sports Bettor",
-    avatar: "/placeholder.svg?height=200&width=200",
+    title: "Sports Betting Consultant",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
   },
   {
     quote:
-      "As a fantasy league manager, AlgoEdge has been a game-changer. The real-time insights have helped me make crucial decisions that led to multiple league wins.",
+      "I've never seen a fantasy tool this flexible. If this works like you're planning, it's going to dominate fantasy leagues.",
     author: "Sarah L.",
-    role: "Fantasy League Champion",
-    avatar: "/placeholder.svg?height=200&width=200",
+    title: "Fantasy League Commissioner",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
   },
   {
     quote:
-      "The intuitive interface and powerful analytics of AlgoEdge have made complex sports data accessible and actionable. It's an essential tool for any serious sports analyst.",
+      "The concept is killer. If you can pull this off cleanly, it's going to be a game-changer for how people use sports data.",
     author: "David R.",
-    role: "Sports Data Analyst",
-    avatar: "/placeholder.svg?height=200&width=200",
+    title: "Quantitative Analyst",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
   },
 ]
 
 export function TestimonialsSection() {
   return (
-    <section className="py-24">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">What Our Users Say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section id="testimonials" className="py-20 bg-gray-900 relative overflow-hidden">
+      {/* Background image overlay */}
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?auto=format&fit=crop&q=80')] opacity-5"></div>
+
+      <div className="container mx-auto px-4 relative">
+        <h2 className="text-5xl font-bold text-white text-center mb-4">Industry Reactions</h2>
+        <p className="text-xl text-gray-300 text-center mb-16 max-w-2xl mx-auto">
+          Early feedback from sports bettors, fantasy players, and data pros who've seen what we're building.
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <p className="text-gray-600 mb-4">"{testimonial.quote}"</p>
+            <div
+              key={index}
+              className="glass-card rounded-xl p-8 group hover:translate-y-[-4px] transition-all duration-300 bg-gray-800/20 backdrop-blur-sm border border-gray-700/30"
+            >
+              <Quote className="w-10 h-10 text-[#4fd1c5] mb-6 opacity-50 group-hover:opacity-100 transition-opacity" />
+              <p className="text-gray-300 mb-8 leading-relaxed">{testimonial.quote}</p>
               <div className="flex items-center">
-                <Avatar className="h-12 w-12 mr-4">
-                  <AvatarImage src={testimonial.avatar} alt={testimonial.author} />
-                  <AvatarFallback>
-                    {testimonial.author
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </AvatarFallback>
-                </Avatar>
+                <img
+                  src={testimonial.image || "/placeholder.svg"}
+                  alt={testimonial.author}
+                  className="w-12 h-12 rounded-full mr-4 ring-2 ring-[#4fd1c5]/30"
+                />
                 <div>
-                  <p className="font-semibold">{testimonial.author}</p>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  <h4 className="text-white font-semibold">{testimonial.author}</h4>
+                  <p className="text-[#4fd1c5]">{testimonial.title}</p>
                 </div>
               </div>
             </div>
