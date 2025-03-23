@@ -58,6 +58,9 @@ export function SiteHeader() {
                 <Link href="/about" className="text-white hover:text-[#4fd1c5] transition-colors font-medium">
                   About Us
                 </Link>
+                <Link href="/features" className="text-white hover:text-[#4fd1c5] transition-colors font-medium">
+                  Features
+                </Link>
                 <Link href="/data" className="text-white hover:text-[#4fd1c5] transition-colors font-medium">
                   Data/API
                 </Link>
@@ -146,6 +149,13 @@ export function SiteHeader() {
                     About Us
                   </Link>
                   <Link
+                    href="/features"
+                    className="text-white hover:text-[#4fd1c5] transition-colors font-medium"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Features
+                  </Link>
+                  <Link
                     href="/data"
                     className="text-white hover:text-[#4fd1c5] transition-colors font-medium"
                     onClick={() => setIsMenuOpen(false)}
@@ -229,3 +239,4 @@ export function SiteHeader() {
     </header>
   )
 }
+

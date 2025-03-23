@@ -69,11 +69,6 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-white/80 hover:text-[#4fd1c5] transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="text-white/80 hover:text-[#4fd1c5] transition-colors">
                   Contact
                 </Link>
@@ -91,11 +86,6 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/api" className="text-white/80 hover:text-[#4fd1c5] transition-colors">
-                  API Reference
-                </Link>
-              </li>
-              <li>
                 <Link href="/tutorials" className="text-white/80 hover:text-[#4fd1c5] transition-colors">
                   Tutorials
                 </Link>
@@ -103,11 +93,6 @@ export function SiteFooter() {
               <li>
                 <Link href="/faq" className="text-white/80 hover:text-[#4fd1c5] transition-colors">
                   FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/support" className="text-white/80 hover:text-[#4fd1c5] transition-colors">
-                  Support
                 </Link>
               </li>
             </ul>
@@ -161,3 +146,4 @@ export function SiteFooter() {
     </footer>
   )
 }
+
