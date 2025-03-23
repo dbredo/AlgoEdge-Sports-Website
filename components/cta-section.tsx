@@ -17,7 +17,7 @@ export function CTASection() {
             </span>
           </p>
           <div className="flex justify-center">
-            <Link href="/register">
+            <Link href="/waitlist">
               <Button
                 size="lg"
                 className="flash-teal-bg text-[#3f6d63] bg-white px-8 py-3 rounded-full shadow-lg button-hover group"
