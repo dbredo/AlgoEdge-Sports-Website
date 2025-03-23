@@ -113,9 +113,11 @@ export default function TutorialsPage() {
                   on social media.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <Button className="rounded-full bg-[#3f6d63] text-white hover:bg-[#345c54]">
-                    Subscribe to Updates
-                  </Button>
+                  <Link href="/waitlist">
+                    <Button className="rounded-full bg-[#3f6d63] text-white hover:bg-[#345c54]">
+                      Subscribe to Updates
+                    </Button>
+                  </Link>
                   <Link href="/documentation">
                     <Button variant="outline" className="rounded-full border-[#3f6d63] text-[#3f6d63]">
                       View Documentation
