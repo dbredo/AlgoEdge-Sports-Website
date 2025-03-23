@@ -8,6 +8,7 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { CTASection } from "@/components/cta-section"
 import { SiteFooter } from "@/components/site-footer"
 import { Button } from "@/components/ui/button"
+import { ArrowRight, Rocket } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "AlgoEdge Sports | Advanced Sports Analytics Platform",
