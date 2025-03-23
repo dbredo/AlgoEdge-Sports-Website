@@ -62,6 +62,8 @@ export function WaitlistForm() {
       }
     } catch (error) {
       console.error("Form submission error:", error)
+      // Log more details about the error
+      console.error("Error details:", JSON.stringify(error, null, 2))
       setErrorMessage("An unexpected error occurred. Please try again.")
       toast({
         title: "Something went wrong",
@@ -175,3 +177,4 @@ export function WaitlistForm() {
     </Form>
   )
 }
+
