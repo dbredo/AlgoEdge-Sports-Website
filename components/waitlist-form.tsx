@@ -15,6 +15,9 @@ const formSchema = z.object({
   firstName: z.string().min(2, {
     message: "First name must be at least 2 characters.",
   }),
+  lastName: z.string().min(2, {
+    message: "Last name must be at least 2 characters.",
+  }),
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
@@ -29,6 +32,7 @@ export function WaitlistForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: "",
+      lastName: "",
       email: "",
     },
   })
@@ -86,7 +90,7 @@ export function WaitlistForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
             name="firstName"
@@ -107,14 +111,13 @@ export function WaitlistForm() {
 
           <FormField
             control={form.control}
-            name="email"
+            name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700 font-medium">Email Address</FormLabel>
+                <FormLabel className="text-gray-700 font-medium">Last Name</FormLabel>
                 <FormControl>
                   <Input
-                    type="email"
-                    placeholder="Enter your email address"
+                    placeholder="Enter your last name"
                     className="h-12 rounded-lg border-gray-300 focus:border-[#3f6d63] focus:ring-[#3f6d63]"
                     {...field}
                   />
@@ -124,6 +127,25 @@ export function WaitlistForm() {
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-gray-700 font-medium">Email Address</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="Enter your email address"
+                  className="h-12 rounded-lg border-gray-300 focus:border-[#3f6d63] focus:ring-[#3f6d63]"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         {errorMessage && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center space-x-2">
