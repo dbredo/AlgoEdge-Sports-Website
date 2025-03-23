@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Facebook, Twitter, Instagram, Linkedin, Github, BarChart2 } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, BarChart2 } from "lucide-react"
+import { FaYoutube, FaTiktok } from "react-icons/fa"
 
 export function SiteFooter() {
   return (
@@ -29,8 +30,21 @@ export function SiteFooter() {
               <a href="#" className="text-white/60 hover:text-[#4fd1c5] transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a href="#" className="text-white/60 hover:text-[#4fd1c5] transition-colors">
-                <Github className="h-5 w-5" />
+              <a
+                href="https://www.youtube.com/@algoedgesports"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#4fd1c5] transition-colors"
+              >
+                <FaYoutube className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@algoedgesports"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#4fd1c5] transition-colors"
+              >
+                <FaTiktok className="h-5 w-5" />
               </a>
             </div>
           </div>

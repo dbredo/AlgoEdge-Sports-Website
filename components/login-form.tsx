@@ -3,13 +3,15 @@
 import type React from "react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { supabase } from "@/lib/supabase"
+import { ArrowRight, Mail, Lock } from "lucide-react"
 
-const LoginForm = () => {
+export function LoginForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
@@ -82,33 +84,71 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleLogin} className="space-y-4">
-      <div>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          required
-        />
+    <form onSubmit={handleLogin} className="space-y-6">
+      <div className="space-y-2">
+        <Label htmlFor="email" className="text-gray-700 font-medium">
+          Email
+        </Label>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <Mail className="h-5 w-5 text-gray-400" />
+          </div>
+          <Input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            className="pl-10 py-2 border-gray-300 focus:border-[#3f6d63] focus:ring-[#3f6d63] rounded-lg"
+          />
+        </div>
       </div>
-      <div>
-        <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password"
-          required
-        />
+
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <Label htmlFor="password" className="text-gray-700 font-medium">
+            Password
+          </Label>
+          <Link href="/forgot-password" className="text-sm text-[#3f6d63] hover:text-[#345c54]">
+            Forgot password?
+          </Link>
+        </div>
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <Lock className="h-5 w-5 text-gray-400" />
+          </div>
+          <Input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            required
+            className="pl-10 py-2 border-gray-300 focus:border-[#3f6d63] focus:ring-[#3f6d63] rounded-lg"
+          />
+        </div>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
-      <Button disabled={loading} type="submit">
-        {loading ? "Logging in..." : "Login"}
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>
+      )}
+
+      <Button
+        disabled={loading}
+        type="submit"
+        className="w-full h-11 rounded-full bg-[#3f6d63] text-white hover:bg-[#345c54] transition-all"
+      >
+        {loading ? "Logging in..." : "Sign In"}
+        {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
       </Button>
+
+      <div className="text-center text-gray-600 text-sm">
+        Don't have an account?{" "}
+        <Link href="/register" className="text-[#3f6d63] hover:text-[#345c54] font-medium">
+          Join the waitlist
+        </Link>
+      </div>
     </form>
   )
 }
