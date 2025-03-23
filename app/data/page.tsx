@@ -74,13 +74,14 @@ export default function DataPage() {
   return (
     <>
       <SiteHeader />
-      <main className="pt-[72px]">
+      <main className="pt-[72px] bg-[#e5e7eb]">
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <div className="py-16 sm:py-24">
             <h1 className="text-center text-[48px] font-bold leading-[1.1] tracking-tight sm:text-[56px]">
-              Unmatched Sports Data to
-              <span className="text-[#3f6d63]"> Fuel Your Analysis</span>
+              Unmatched Sports Data to Fuel Your
+              <br />
+              <span className="text-[#3f6d63]">Analysis</span>
             </h1>
             <p className="mx-auto mt-6 max-w-[800px] text-center text-[18px] leading-[1.6] text-[#6b7280]">
               AlgoEdge provides a comprehensive suite of sports data, combining historical trends, real-time updates,
@@ -101,21 +102,23 @@ export default function DataPage() {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="relative rounded-[28px] bg-white p-8"
+                className="relative rounded-[28px] p-8"
                 style={{
-                  boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.05), 0 2px 8px rgba(0, 0, 0, 0.08)",
+                  backgroundColor: "#f0f2f5",
+                  border: "2px solid #9ca3af",
+                  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
                 }}
               >
                 <feature.icon className="h-8 w-8 text-[#3f6d63]" />
                 <h3 className="mt-6 text-xl font-semibold text-gray-900">{feature.title}</h3>
-                <p className="mt-4 text-gray-600 leading-relaxed">{feature.description}</p>
+                <p className="mt-4 text-[#6b7280] leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* API Visualization Section */}
-        <section className="bg-gray-50 pt-12 pb-24">
+        <section className="bg-[#e5e7eb] pt-12 pb-24">
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-[1100px] overflow-hidden rounded-3xl">
               <img
@@ -178,13 +181,27 @@ export default function DataPage() {
                   well as our own curated information, to make it easier to implement and maintain.
                 </p>
                 <div className="space-y-8">
-                  <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <div
+                    className="rounded-2xl p-6"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      border: "2px solid #9ca3af",
+                      boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+                    }}
+                  >
                     <h3 className="text-lg font-semibold text-gray-900">Built with Open Data in Mind</h3>
                     <p className="mt-3 text-[#6b7280]">
                       All of our APIs use open data, ensuring that anything you build is independent and adaptable.
                     </p>
                   </div>
-                  <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+                  <div
+                    className="rounded-2xl p-6"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      border: "2px solid #9ca3af",
+                      boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+                    }}
+                  >
                     <h3 className="text-lg font-semibold text-gray-900">Scale Seamlessly</h3>
                     <p className="mt-3 text-[#6b7280]">
                       AlgoEdge's cloud-native API infrastructure scales effortlessly, limited only by your creativity
@@ -198,7 +215,7 @@ export default function DataPage() {
         </section>
 
         {/* Benefits Section */}
-        <section className="bg-white py-24">
+        <section className="bg-[#f0f2f5] py-24">
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col items-center text-center">
               <h2 className="text-[40px] font-bold text-gray-900">Why Choose AlgoEdge?</h2>
@@ -210,7 +227,14 @@ export default function DataPage() {
 
             <div className="mt-20 grid gap-8 md:grid-cols-3">
               {/* Quick Start Card */}
-              <div className="group rounded-2xl bg-gradient-to-b from-gray-50 to-white p-8 shadow-sm ring-1 ring-gray-200 transition-all hover:shadow-lg">
+              <div
+                className="group rounded-2xl p-8"
+                style={{
+                  backgroundColor: "#e5e7eb",
+                  border: "2px solid #9ca3af",
+                  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+                }}
+              >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#3f6d63]/10">
                   <Shield className="h-6 w-6 text-[#3f6d63]" />
                 </div>
@@ -228,7 +252,14 @@ export default function DataPage() {
               </div>
 
               {/* Real-Time Access Card */}
-              <div className="group rounded-2xl bg-gradient-to-b from-gray-50 to-white p-8 shadow-sm ring-1 ring-gray-200 transition-all hover:shadow-lg">
+              <div
+                className="group rounded-2xl p-8"
+                style={{
+                  backgroundColor: "#e5e7eb",
+                  border: "2px solid #9ca3af",
+                  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+                }}
+              >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#3f6d63]/10">
                   <Activity className="h-6 w-6 text-[#3f6d63]" />
                 </div>
@@ -240,7 +271,14 @@ export default function DataPage() {
               </div>
 
               {/* Affordable Pricing Card */}
-              <div className="group rounded-2xl bg-gradient-to-b from-gray-50 to-white p-8 shadow-sm ring-1 ring-gray-200 transition-all hover:shadow-lg">
+              <div
+                className="group rounded-2xl p-8"
+                style={{
+                  backgroundColor: "#e5e7eb",
+                  border: "2px solid #9ca3af",
+                  boxShadow: "0 6px 16px rgba(0, 0, 0, 0.15)",
+                }}
+              >
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#3f6d63]/10">
                   <Database className="h-6 w-6 text-[#3f6d63]" />
                 </div>
