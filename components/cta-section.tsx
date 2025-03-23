@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
@@ -20,7 +22,7 @@ export function CTASection() {
             <Link href="/waitlist">
               <Button
                 size="lg"
-                className="flash-teal-bg text-[#3f6d63] bg-white px-8 py-3 rounded-full shadow-lg button-hover group"
+                className="slow-flash-teal-bg text-[#3f6d63] bg-white px-8 py-3 rounded-full shadow-lg button-hover group"
               >
                 Join The Waitlist
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -29,6 +31,19 @@ export function CTASection() {
           </div>
         </div>
       </div>
+      <style jsx global>{`
+        @keyframes slowFlashTeal {
+          0%, 100% {
+            background-color: white;
+          }
+          50% {
+            background-color: rgba(79, 209, 197, 0.2);
+          }
+        }
+        .slow-flash-teal-bg {
+          animation: slowFlashTeal 4s ease-in-out infinite; /* Slowed down to 4 seconds */
+        }
+      `}</style>
     </section>
   )
 }
