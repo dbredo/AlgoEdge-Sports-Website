@@ -4,18 +4,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { WaitlistForm } from "@/components/waitlist-form"
 import { Button } from "@/components/ui/button"
-import {
-  ArrowRight,
-  BarChart2,
-  Filter,
-  GitCompare,
-  LineChart,
-  Zap,
-  Brain,
-  CheckCircle2,
-  Clock,
-  Target,
-} from "lucide-react"
+import { ArrowRight, BarChart2, Filter, GitCompare, LineChart, Zap, CheckCircle2, Clock, Target } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Join the Waitlist | AlgoEdge Sports",
@@ -120,13 +109,6 @@ export default function WaitlistPage() {
                 </div>
               ))}
             </div>
-
-            <div className="bg-gradient-to-br from-[#3f6d63] to-[#345c54] text-white rounded-[20px] p-6 shadow-lg flex items-center">
-              <div className="p-3 rounded-full bg-white/10 mr-4">
-                <Brain className="h-6 w-6 text-white" />
-              </div>
-              <p className="text-white/90 font-medium">Discover deeper trends with future AI-powered insights</p>
-            </div>
           </div>
         </section>
 
@@ -150,14 +132,17 @@ export default function WaitlistPage() {
                   "Unlock 3 months free if you're in the first 1,000",
                   "Get early access to our mobile app and backtesting tools",
                 ].map((item, index) => (
-                  <div key={index} className="flex items-start p-6 bg-[#f0f2f5] rounded-[20px] border border-gray-100">
+                  <div
+                    key={index}
+                    className="flex items-start p-6 bg-[#e0e5e9] rounded-[20px] border border-gray-200 shadow-sm"
+                  >
                     <CheckCircle2 className="h-6 w-6 text-[#3f6d63] mt-0.5 mr-3 flex-shrink-0" />
                     <p className="text-gray-800 font-medium">{item}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="bg-[#3f6d63]/5 rounded-[20px] p-8 border border-[#3f6d63]/20">
+              <div className="bg-[#e0e5e9] rounded-[20px] p-8 border border-gray-200 shadow-sm">
                 <div className="flex justify-center mb-6">
                   <div className="p-3 rounded-full bg-[#3f6d63]/20">
                     <Target className="h-6 w-6 text-[#3f6d63]" />
@@ -200,7 +185,7 @@ export default function WaitlistPage() {
                     description: "Create custom leaderboards based on your criteria",
                   },
                 ].map((item, index) => (
-                  <div key={index} className="bg-[#f0f2f5] rounded-[20px] p-6 border border-gray-100">
+                  <div key={index} className="bg-[#e0e5e9] rounded-[20px] p-6 border border-gray-200 shadow-sm">
                     <h4 className="text-lg font-semibold text-[#3f6d63] mb-2">{item.title}</h4>
                     <p className="text-gray-700">{item.description}</p>
                   </div>
@@ -218,7 +203,7 @@ export default function WaitlistPage() {
                     description: "Refine your approach as new data becomes available",
                   },
                 ].map((item, index) => (
-                  <div key={index} className="bg-[#f0f2f5] rounded-[20px] p-6 border border-gray-100">
+                  <div key={index} className="bg-[#e0e5e9] rounded-[20px] p-6 border border-gray-200 shadow-sm">
                     <h4 className="text-lg font-semibold text-[#3f6d63] mb-2">{item.title}</h4>
                     <p className="text-gray-700">{item.description}</p>
                   </div>
@@ -258,3 +243,4 @@ export default function WaitlistPage() {
     </>
   )
 }
+
