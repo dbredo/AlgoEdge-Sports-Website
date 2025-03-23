@@ -88,7 +88,7 @@ export default function DataPage() {
               and advanced analytics to support your decision-making.
             </p>
             <div className="mt-12 flex justify-center">
-              <Link href="/register">
+              <Link href="/waitlist">
                 <Button className="group h-14 rounded-full bg-[#3f6d63] px-8 text-lg font-medium text-white transition-all hover:bg-[#345c54]">
                   Join the waitlist
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -296,7 +296,7 @@ export default function DataPage() {
                 <br />
                 Contact us for a demo or explore our demo options today!
               </p>
-              <Link href="/register" target="_blank" rel="noopener noreferrer">
+              <Link href="/waitlist" target="_blank" rel="noopener noreferrer">
                 <Button className="group mt-10 h-14 rounded-full bg-[#3f6d63] px-8 text-lg font-medium text-white transition-all hover:bg-[#345c54]">
                   Join the waitlist
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

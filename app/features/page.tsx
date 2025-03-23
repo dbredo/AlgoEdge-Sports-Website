@@ -385,7 +385,7 @@ export default function FeaturesPage() {
                 AlgoEdge is more than just a stats site. It's a smarter, faster, and more intuitive way to analyze
                 sports — and it's built for people who want to make data-driven decisions without technical friction.
               </p>
-              <Link href="/register">
+              <Link href="/waitlist">
                 <Button className="group h-14 rounded-full bg-white text-[#3f6d63] px-8 text-lg font-medium transition-all hover:bg-[#4fd1c5] hover:text-white">
                   Join the waitlist
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

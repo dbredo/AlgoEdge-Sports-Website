@@ -145,7 +145,7 @@ export function LoginForm() {
 
       <div className="text-center text-gray-600 text-sm">
         Don't have an account?{" "}
-        <Link href="/register" className="text-[#3f6d63] hover:text-[#345c54] font-medium">
+        <Link href="/waitlist" className="text-[#3f6d63] hover:text-[#345c54] font-medium">
           Join the waitlist
         </Link>
       </div>

@@ -70,7 +70,7 @@ export default function PricingPage() {
               Choose the plan that best fits your needs. All plans include our core analytics features.
             </p>
             <div className="mt-12 flex justify-center">
-              <Link href="/register">
+              <Link href="/waitlist">
                 <Button className="group h-14 rounded-full bg-[#3f6d63] px-8 text-lg font-medium text-white transition-all hover:bg-[#345c54]">
                   Join the waitlist
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -312,7 +312,7 @@ export default function PricingPage() {
                 Join AlgoEdge Sports today and transform the way you analyze sports data with our powerful,
                 user-friendly platform.
               </p>
-              <Link href="/register">
+              <Link href="/waitlist">
                 <Button className="group h-14 rounded-full bg-[#3f6d63] px-8 text-lg font-medium text-white transition-all hover:bg-[#345c54]">
                   Join the waitlist
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
