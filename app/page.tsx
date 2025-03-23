@@ -24,9 +24,10 @@ export default function Home() {
           title="Revolutionize Your Sports Analysis with AlgoEdge"
           description="Harness the power of advanced analytics to gain a competitive edge in sports betting and fantasy leagues. Create custom algorithms, analyze real-time data, and make informed decisions with ease."
           cta={
-            <Link href="/signup">
-              <Button className="h-10 rounded-lg bg-[#3f6d63] hover:bg-[#345c54] px-6 text-[15px] font-medium text-white shadow-md transition-all duration-300 border-none">
-                Register Now
+            <Link href="/waitlist">
+              <Button className="group h-11 rounded-md bg-[#3f6d63] hover:bg-[#345c54] px-6 text-[15px] font-medium text-white button-hover flex items-center">
+              <Rocket className="mr-2 h-4 w-4" />
+                Join the waitlist
               </Button>
             </Link>
           }
