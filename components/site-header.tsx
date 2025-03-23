@@ -4,7 +4,7 @@ import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
-import { Menu, X, BarChart2, User } from "lucide-react"
+import { Menu, X, BarChart2, User, Rocket } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -71,10 +71,10 @@ export function SiteHeader() {
                   Login
                 </Link>
                 <Link
-                  href="/register"
-                  className="bg-white hover:bg-[#4fd1c5] text-[#3f6d63] px-4 py-2 rounded-lg transition-all duration-300 font-medium"
+                  href="/waitlist"
+                  className="bg-white hover:bg-[#4fd1c5] text-[#3f6d63] px-4 py-2 rounded-lg transition-all duration-300 font-medium flex items-center"
                 >
-                  Register Now
+                  <Rocket className="h-4 w-4 mr-2 text-[#3f6d63]" /> Launching Soon – Join Waitlist
                 </Link>
               </>
             ) : (
@@ -177,11 +177,11 @@ export function SiteHeader() {
                     Login
                   </Link>
                   <Link
-                    href="/register"
-                    className="bg-white hover:bg-[#4fd1c5] text-[#3f6d63] px-4 py-2 rounded-lg transition-all duration-300 text-center font-medium"
+                    href="/waitlist"
+                    className="bg-white hover:bg-[#4fd1c5] text-[#3f6d63] px-4 py-2 rounded-lg transition-all duration-300 text-center font-medium flex items-center justify-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Register Now
+                    <Rocket className="h-4 w-4 mr-2 text-[#3f6d63]" /> Launching Soon – Join Waitlist
                   </Link>
                 </>
               ) : (
@@ -239,4 +239,6 @@ export function SiteHeader() {
     </header>
   )
 }
+
+
 
