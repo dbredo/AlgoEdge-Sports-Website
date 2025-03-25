@@ -16,14 +16,16 @@ const formSchema = z.object({
   description: z.string().min(10),
 })
 
-// Waitlist form schema
+// Updated waitlist form schema with interest fields
 const waitlistFormSchema = z.object({
   firstName: z.string().min(2),
   lastName: z.string().min(2),
   email: z.string().email(),
+  interest: z.string().optional(), // Making it optional to maintain backward compatibility
+  otherInterest: z.string().optional(),
 })
 
-// New function for waitlist submissions
+// Updated function for waitlist submissions
 export async function submitWaitlistForm(formData: z.infer<typeof waitlistFormSchema>) {
   console.log("Submitting waitlist form data:", formData) // Debug log
   
@@ -40,6 +42,8 @@ export async function submitWaitlistForm(formData: z.infer<typeof waitlistFormSc
           first_name: validatedData.firstName,
           last_name: validatedData.lastName,
           email: validatedData.email,
+          interest: validatedData.interest || null, // Handle the case where interest is not provided
+          other_interest: validatedData.otherInterest || null,
           created_at: new Date().toISOString(),
         },
       ])
