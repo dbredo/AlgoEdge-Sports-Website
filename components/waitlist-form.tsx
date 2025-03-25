@@ -7,6 +7,7 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { toast } from "@/components/ui/use-toast"
 import { ArrowRight, CheckCircle2, Loader2, AlertCircle } from "lucide-react"
 import { submitWaitlistForm } from "@/app/actions"
@@ -21,6 +22,10 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
+  interest: z.string({
+    required_error: "Please select what you're interested in using AlgoEdge for.",
+  }),
+  otherInterest: z.string().optional(),
 })
 
 export function WaitlistForm() {
@@ -34,6 +39,8 @@ export function WaitlistForm() {
       firstName: "",
       lastName: "",
       email: "",
+      interest: "",
+      otherInterest: "",
     },
   })
 
@@ -148,6 +155,78 @@ export function WaitlistForm() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="interest"
+          render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel className="text-gray-700 font-medium">
+                What are you most interested in using AlgoEdge for?
+              </FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-col space-y-2"
+                >
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="betting" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">Building betting algorithms</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="tracking" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">Tracking team or player performance</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="fantasy" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">Fantasy sports optimization</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="fun" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">Exploring data for fun</FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem value="other" />
+                    </FormControl>
+                    <FormLabel className="font-normal cursor-pointer">Other</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Show text input if "Other" is selected */}
+        {form.watch("interest") === "other" && (
+          <FormField
+            control={form.control}
+            name="otherInterest"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-gray-700 font-medium">Please specify</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Tell us what you'd use AlgoEdge for"
+                    className="h-12 rounded-lg border-gray-300 focus:border-[#3f6d63] focus:ring-[#3f6d63]"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
         {errorMessage && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center space-x-2">

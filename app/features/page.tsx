@@ -155,19 +155,17 @@ export default function FeaturesPage() {
               </p>
               <div className="mt-6 bg-[#3f6d63]/5 rounded-xl p-4 border border-[#3f6d63]/10">
                 <div className="flex items-center justify-between mb-2 text-sm font-medium text-gray-500 border-b border-gray-200 pb-2">
-                  <span>Rank</span>
-                  <span>Team</span>
-                  <span>Score</span>
+                  <span>Matchup</span>
+                  <span>Win Probability</span>
                 </div>
                 {[
-                  { rank: 1, team: "Team A", score: 94.8 },
-                  { rank: 2, team: "Team B", score: 89.3 },
-                  { rank: 3, team: "Team C", score: 85.1 },
-                ].map((item) => (
-                  <div key={item.rank} className="flex items-center justify-between py-2 text-gray-800">
-                    <span className="font-bold">{item.rank}</span>
-                    <span>{item.team}</span>
-                    <span className="font-medium text-[#3f6d63]">{item.score}</span>
+                  { teams: "Team A vs Team B", probability: "72% - 28%" },
+                  { teams: "Team C vs Team D", probability: "65% - 35%" },
+                  { teams: "Team E vs Team F", probability: "55% - 45%" },
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between py-2 text-gray-800">
+                    <span>{item.teams}</span>
+                    <span className="font-medium text-[#3f6d63]">{item.probability}</span>
                   </div>
                 ))}
               </div>
