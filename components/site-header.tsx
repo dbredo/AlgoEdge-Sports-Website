@@ -4,7 +4,7 @@ import React from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
-import { Menu, X, BarChart2, User, Rocket } from "lucide-react"
+import { Menu, X, BarChart2, User, Rocket, ArrowRight } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -236,9 +236,70 @@ export function SiteHeader() {
           </div>
         )}
       </div>
+
+      {/* Announcement Bar with Scrolling Text */}
+      <div className="w-full bg-[#4fd1c5] py-2 overflow-hidden">
+        {/* Static announcement visible immediately */}
+        <div className="text-center mb-2 md:hidden">
+          <div className="inline-flex items-center">
+            <span className="text-[#3f6d63] font-semibold flex items-center">
+              <span className="mr-2">🔥</span> Get 3 months free – Join the waitlist today
+            </span>
+            <Link href="/waitlist" className="ml-2 text-[#3f6d63] font-bold flex items-center hover:underline">
+              <span>Join now</span>
+              <ArrowRight className="h-4 w-4 ml-1" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="marquee-container">
+          <div className="marquee-content">
+            {[...Array(30)].map((_, index) => (
+              <div key={index} className="inline-flex items-center mx-16">
+                <span className="text-[#3f6d63] font-semibold flex items-center">
+                  <span className="mr-2">🔥</span> Get 3 months free – Join the waitlist today
+                </span>
+                <Link href="/waitlist" className="ml-2 text-[#3f6d63] font-bold flex items-center hover:underline">
+                  <span>Join now</span>
+                  <ArrowRight className="h-4 w-4 ml-1" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .marquee-container {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+        }
+        
+        .marquee-content {
+          display: inline-block;
+          white-space: nowrap;
+          animation: marquee 300s linear infinite;
+          position: relative;
+          left: 0;
+        }
+        
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .marquee-content {
+            animation: marquee 150s linear infinite;
+          }
+        }
+      `}</style>
     </header>
   )
 }
-
-
 
