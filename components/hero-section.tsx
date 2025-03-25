@@ -47,7 +47,7 @@ export function HeroSection({ title, description, cta }: HeroSectionProps) {
             <div className="animate-float-small overflow-visible p-4 rounded-2xl bg-[#3f6d63]/20 backdrop-blur-sm">
               <div className="relative">
                 <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-GUG6CZpVsEYq0xJHihBUy2knMEKCGz.png"
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AlgoEdge2-V2nkwlvKTeSCBWB7zktScIn4gNmEOO.png"
                   alt="AlgoEdge Sports Analytics Dashboard"
                   className="w-full h-auto rounded-xl shadow-lg border-2 border-[#3f6d63]/30"
                 />
