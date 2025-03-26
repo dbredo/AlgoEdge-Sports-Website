@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, BarChart2 } from "lucide-react"
-import { FaYoutube, FaTiktok } from "react-icons/fa"
+import { FaYoutube, FaTiktok , FaFacebook, FaInstagram, FaLinkedin, FaTwitter} from "react-icons/fa"
 
 export function SiteFooter() {
   return (
