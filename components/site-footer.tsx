@@ -21,14 +21,26 @@ export function SiteFooter() {
               <a href="#" className="text-white/60 hover:text-[#4fd1c5] transition-colors">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-white/60 hover:text-[#4fd1c5] transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="https://x.com/AlgoEdgeSports"
+              target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#4fd1c5] transition-colors"
+              >
+                <FaTwitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-white/60 hover:text-[#4fd1c5] transition-colors">
-                <Instagram className="h-5 w-5" />
+              <a href="https://www.instagram.com/algoedgesports/" 
+              target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#4fd1c5] transition-colors"
+              >
+                <FaInstagram className="h-5 w-5" />
               </a>
-              <a href="#" className="text-white/60 hover:text-[#4fd1c5] transition-colors">
-                <Linkedin className="h-5 w-5" />
+              <a href="https://www.linkedin.com/company/algoedge-sports/" 
+              target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/60 hover:text-[#4fd1c5] transition-colors"
+              >
+                <FaLinkedin className="h-5 w-5" />
               </a>
               <a
                 href="https://www.youtube.com/@algoedgesports"
