@@ -30,6 +30,9 @@ export function HeroSection({ title, description, cta }: HeroSectionProps) {
               Harness the power of advanced analytics to gain a competitive edge in sports betting and fantasy leagues.
               Create custom algorithms, analyze real-time data, and make informed decisions with ease.
             </p>
+	    <p className="text-lg font-semibold text-[#3f6d63] mt-2 mb-2">
+              ⚡️ Limited time offer: 3 months free for the first 1,000 on the waitlist.
+            </p>
             <div className="flex flex-wrap items-center gap-4 pt-4">
               {cta}
               <Link href="/features">
