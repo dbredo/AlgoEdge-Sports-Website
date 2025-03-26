@@ -33,7 +33,6 @@ export default function Home() {
             </Link>
           }
         />
-	<CTASection />
         <FeaturesSection />
         <HowItWorksSection />
         <TestimonialsSection />
